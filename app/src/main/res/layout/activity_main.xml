@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <import type="wolffincdevelopment.com.testkotlinapp.activity.main.viewmodel.WeatherInfoViewModel" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="WeatherInfoViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="wolffincdevelopment.com.testkotlinapp.activity.main.WeatherInfoActivity">
+
+        <TextView
+            android:id="@+id/city_title"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@{item.title}"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="@{item.showProgessWheel || item.showError ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Weather for Grand Rapids" />
+
+        <ExpandableListView
+            android:id="@+id/list_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:groupIndicator="@null"
+            android:divider="@color/light_primary"
+            android:dividerHeight="10dp"
+            android:scrollbars="none"
+            android:padding="12dp"
+            android:clipToPadding="false"
+            android:visibility="@{item.showProgessWheel ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shadow" />
+
+        <View
+            android:id="@+id/shadow"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@drawable/shadow"
+            android:visibility="@{item.showProgessWheel || item.showError ? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@+id/city_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@{item.errorText}"
+            android:textColor="@color/primary_text"
+            android:textSize="20sp"
+            android:visibility="@{item.showError ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ERROR" />
+
+        <ProgressBar
+            android:id="@+id/progress_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:progress="50"
+            android:visibility="@{item.showProgessWheel ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</layout>
